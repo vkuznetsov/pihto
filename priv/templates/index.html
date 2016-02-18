@@ -1,0 +1,10 @@
+{% extends "application.html" %}
+
+{% block content %}
+Here's my content!
+
+  {% for image in images %}
+  <li>{{ image }}</li>
+  {% endfor %}
+
+{% endblock %}

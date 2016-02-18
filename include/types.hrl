@@ -1,0 +1,3 @@
+-type id() :: integer().
+-type url() :: string().
+-type digest() :: string().

@@ -1,0 +1,9 @@
+{application, pihto,
+ [{description, "N2O Sample"},
+  {vsn, "2.10"},
+  {registered, []},
+  {applications, [kernel, stdlib, n2o, kvs]},
+  {mod, { pihto_app, []}},
+  {env, [
+         {pools, []}
+        ]} ]}.
