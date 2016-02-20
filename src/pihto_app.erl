@@ -53,17 +53,14 @@ log_response(Status, Headers, _Body, Req) ->
 %% Routes
 %% =============================================================================
 cowboy_routes() ->
-    [{'_', [{"/static/js/[...]", n2o_static, static_js()},
-            {"/static/css/[...]", n2o_static, static_css()},
-            {"/static/fonts/[...]", n2o_static, static_fonts()},
-            {"/images", pihto_images_handler, {}},
+    [{'_', [{"/static/[...]", n2o_static, { dir, "priv/static", mime() }},
+            {"/n2o/[...]", n2o_static, { dir, "deps/n2o/priv", mime() }},
+            {"/images/[:id]", pihto_images_handler, []},
+            { "/ws/[...]", n2o_stream, []},
             {'_', n2o_cowboy, []}
            ]}].
 
 %% =============================================================================
 %% Internal functions
 %% =============================================================================
-static_js() -> { dir, "priv/static/js", mime() }.
-static_css() -> { dir, "priv/static/css", mime() }.
-static_fonts() -> { dir, "priv/static/fonts", mime() }.
 mime() -> [ { mimetypes, cow_mimetypes, all } ].

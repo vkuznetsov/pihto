@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+URL=$1
+REFERER=$2
+DEST=$3
+TEMPFILE=$(mktemp)
+
+wget --header="Referer: $REFERER" --output-document=$TEMPFILE --timeout=30 --quota=10M --quiet $URL
+
+SHA=$(cat secret $TEMPFILE | shasum -a224 -b | awk '{gsub(/.{4}/,"/&",$1);print $1}')
+DEST=$DEST$SHA
+
+mkdir -p $(dirname $DEST)
+convert $TEMPFILE[0] -thumbnail 171x180^ -gravity center -extent 171x180 jpeg:$DEST.thumb.jpg
+convert $TEMPFILE[0] -resize 2048x2048\> jpeg:$DEST.big.jpg
+rm -f $TEMPFILE
+
+printf $SHA

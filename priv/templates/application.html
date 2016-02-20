@@ -42,7 +42,6 @@
     <p class="alert alert-info" role="alert"></p>
     <p class="alert alert-danger" role="alert"></p>
 
-    <script src="/static/js/app.js"></script>
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/bootstrap-tagsinput.min.js"></script>
@@ -51,5 +50,17 @@
       {% block content %}{% endblock %}
     </div>
 
+    <script>{{script | safe}}</script>
+    <script src='/n2o/protocols/bert.js'></script>
+    <script src='/n2o/protocols/client.js'></script>
+    <script src='/n2o/protocols/nitrogen.js'></script>
+    <script src='/n2o/bullet.js'></script>
+    <script src='/n2o/xhr.js'></script>
+    <script src='/n2o/utf8.js'></script>
+    <script src='/n2o/template.js'></script>
+    <script src='/n2o/n2o.js'></script>
+    <script src='/n2o/validation.js'></script>
+    <script src='/n2o/ftp.js'></script>
+    <script>protos = [$client,$bert]; N2O_start();</script>
   </body>
 </html>
