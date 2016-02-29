@@ -5,32 +5,21 @@
 <div class="row">
   <div class="col-md-12">
     <p style="text-align: right;">
-      <button type="button" id="btn-select-all" class="btn btn-sm btn-default">
-        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        Select All
-      </button>
-
-      <button type="button" id="btn-select-none" class="btn btn-sm btn-default">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        Select None
-      </button>
-
-      <button type="button" id="btn-edit" class="btn btn-sm btn-primary" disabled="disabled">
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        Edit
-      </button>
-
-      <button type="submit" id="btn-delete" class="btn btn-sm btn-danger" disabled="disabled">
-        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-        Delete
-      </button>
+      {{window_buttons | safe}}
     </p>
   </div>
 </div>
 
-
-<div class="row">
+<div id="images" class="row">
   {{images | safe}}
 </div>
+
+<div id="images_editor" class="row multiple-editor">
+  {{images | safe}}
+</div>
+
+<input type="hidden" id="selected">
+
+<script src="/static/js/images.js"></script>
 
 {% endblock %}

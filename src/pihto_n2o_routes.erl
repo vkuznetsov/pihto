@@ -19,4 +19,7 @@ route_prefix(<<"/ws/",P/binary>>) -> route(P);
 route_prefix(<<"/",P/binary>>) -> route(P);
 route_prefix(P) -> route(P).
 
-route(<<"hello", _/binary>>) -> pihto_n2o_hello.
+route(<<P/binary>>) ->
+    wf:info(?MODULE, "Path: ~p", [P]),
+    pihto_n2o_images_handler.
+%% route(P) -> wf:info(?MODULE, "Path: ~p", [P]).

@@ -42,13 +42,14 @@
     <p class="alert alert-info" role="alert"></p>
     <p class="alert alert-danger" role="alert"></p>
 
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/bootstrap-tagsinput.min.js"></script>
-
     <div class="container">
       {% block content %}{% endblock %}
     </div>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap-tagsinput.min.js"></script>
+    <script src="/static/js/application.js"></script>
 
     <script>{{script | safe}}</script>
     <script src='/n2o/protocols/bert.js'></script>

@@ -33,7 +33,7 @@ stop(_State) ->
 
 log_request(Req) ->
     {RequestId, Req1} = case cowboy_req:header(<<"x-request-id">>, Req) of
-                            {undefined, R} -> {pihto_md5:md5_hex(crypto:strong_rand_bytes(32)), R};
+                            {undefined, R} -> {pihto_crypto:random_hex(), R};
                             {Val, R} -> {Val, R}
                         end,
 
@@ -53,14 +53,20 @@ log_response(Status, Headers, _Body, Req) ->
 %% Routes
 %% =============================================================================
 cowboy_routes() ->
-    [{'_', [{"/static/[...]", n2o_static, { dir, "priv/static", mime() }},
+    [{'_', [{"/static/[...]", cowboy_static, { dir, "priv/static", mime() }},
             {"/n2o/[...]", n2o_static, { dir, "deps/n2o/priv", mime() }},
-            {"/images/[:id]", pihto_images_handler, []},
+            %% {"/images/[:id]", pihto_images_handler, []},
             { "/ws/[...]", n2o_stream, []},
-            {'_', n2o_cowboy, []}
+            {"/images/:container/:key", [{container, function, fun tag_or_list/1}], n2o_cowboy, []
+            },
+            {"/images/recent", n2o_cowboy, []},
+            {"/images", n2o_cowboy, []}
            ]}].
 
 %% =============================================================================
 %% Internal functions
 %% =============================================================================
 mime() -> [ { mimetypes, cow_mimetypes, all } ].
+
+tag_or_list(Type) ->
+    Type == <<"tag">> orelse Type == <<"list">>.
